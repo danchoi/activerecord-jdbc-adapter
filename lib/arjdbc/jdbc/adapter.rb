@@ -324,7 +324,9 @@ module ActiveRecord
       end
 
       def primary_key(table)
-        primary_keys(table).first
+        # Daniel Choi: For some reason, mssql is returning [] for the primary keys
+        # Not a real fix, but a temporary patch
+        primary_keys(table).first || 'id' 
       end
 
       def primary_keys(table)
